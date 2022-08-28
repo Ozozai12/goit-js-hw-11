@@ -44,6 +44,8 @@ class PhotoApiService {
   }
 }
 
+
+
 const photoApiService = new PhotoApiService();
 
 searchForm.addEventListener('submit', imageSearching);
@@ -64,7 +66,18 @@ function imageSearching(evt) {
       gallery.innerHTML = '';
       gallery.insertAdjacentHTML('beforeend', renderGallery(photos.hits));
       lightbox.refresh();
+
+      const { height: cardHeight } = document
+        .querySelector('.gallery')
+        .firstElementChild.getBoundingClientRect();
+
+      window.scrollBy({
+        top: cardHeight * 0.4,
+        behavior: 'smooth',
+      });
+
       loadMoreBtn.style.display = 'block';
+
       if (photos.totalHits === 0) {
         Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
@@ -73,11 +86,13 @@ function imageSearching(evt) {
         hideMoreBtn();
         return;
       }
+
       if (photos.totalHits === photos.hits.length) {
         hideMoreBtn();
       }
+
       Notiflix.Notify.success(`Hooray! We found ${photos.totalHits} images.`);
-      console.log(photos);
+      
     })
     .catch('error');
 }
@@ -105,6 +120,7 @@ function renderGallery(photos) {
     })
     .join('');
 }
+
 
 function moreLoading() {
   photoApiService

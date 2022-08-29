@@ -65,22 +65,19 @@ function imageSearching(evt) {
       gallery.insertAdjacentHTML('beforeend', renderGallery(photos.hits));
       lightbox.refresh();
 
-      
-
       loadMore.style.display = 'block';
-      
-
+  
       if (photos.totalHits === 0) {
         Notiflix.Notify.failure(
           'Sorry, there are no images matching your search query. Please try again.'
         );
 
-        hideMoreBtn();
+        hideMore();
         return;
       }
 
       if (photos.totalHits === photos.hits.length) {
-        hideMoreBtn();
+        hideMore();
       }
 
       Notiflix.Notify.success(`Hooray! We found ${photos.totalHits} images.`);
@@ -135,19 +132,19 @@ function moreLoading() {
     .then(photos => {
       gallery.insertAdjacentHTML('beforeend', renderGallery(photos.hits));
       if (photos.totalHits === photos.hits.length) {
-        hideMoreBtn();
+        hideMore();
       }
       if (Math.round(photos.totalHits / 40) < photoApiService.page) {
         Notiflix.Notify.info(
           "We're sorry, but you've reached the end of search results."
         );
-        hideMoreBtn();
+        hideMore();
       }
       console.log(photos);
     })
     .catch('error');
 }
 
-function hideMoreBtn() {
+function hideMore() {
   loadMore.style.display = 'none';
 }

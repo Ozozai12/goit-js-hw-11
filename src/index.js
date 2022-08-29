@@ -8,7 +8,7 @@ const URL = 'https://pixabay.com/api/?key=';
 
 const searchForm = document.querySelector('.search-form');
 const queryInput = document.querySelector('[name="searchQuery"]');
-const loadMoreBtn = document.querySelector('.load-more');
+const loadMore = document.querySelector('.load-more');
 const gallery = document.querySelector('.gallery');
 
 const lightbox = new SimpleLightbox('.gallery a');
@@ -47,7 +47,7 @@ class PhotoApiService {
 const photoApiService = new PhotoApiService();
 
 searchForm.addEventListener('submit', imageSearching);
-loadMoreBtn.addEventListener('click', moreLoading);
+loadMore.addEventListener('click', moreLoading);
 
 function imageSearching(evt) {
   evt.preventDefault();
@@ -55,7 +55,7 @@ function imageSearching(evt) {
     return Notiflix.Notify.warning('Please type something to begin searching.');
   }
 
-  // loadMoreBtn.style.display = 'none';
+  
   photoApiService.query = queryInput.value;
   photoApiService.resetPage();
   photoApiService
@@ -67,7 +67,7 @@ function imageSearching(evt) {
 
       
 
-      loadMoreBtn.style.display = 'block';
+      loadMore.style.display = 'block';
       
 
       if (photos.totalHits === 0) {
@@ -149,5 +149,5 @@ function moreLoading() {
 }
 
 function hideMoreBtn() {
-  loadMoreBtn.style.display = 'none';
+  loadMore.style.display = 'none';
 }

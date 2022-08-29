@@ -18,7 +18,8 @@ a {
 
 .load-more {
   display: none;
-  margin: 40px auto;
+  /* margin: 40px auto; */
+  text-align: center;
 }
 
 .gallery {
